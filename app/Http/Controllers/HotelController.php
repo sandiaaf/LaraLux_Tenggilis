@@ -34,28 +34,18 @@ class HotelController extends Controller
     {
         $request->validate(['hotelName'=>'required']);
         $request->validate(['address'=>'required']);
-        $request->validate(['postCode'=>'required']);
-        $request->validate(['city'=>'required']);
-        $request->validate(['state'=>'required']);
-
-        $request->validate(['currency'=>'required']);
-        $request->validate(['accom'=>'required']);
-        $request->validate(['category'=>'required']);
-        $request->validate(['web'=>'required']);
+        $request->validate(['phone'=>'required']);
+        $request->validate(['email'=>'required']);
+        $request->validate(['image'=>'required']);
         $request->validate(['typeID'=>'required']);
         
         $newHotel = new Hotel;
 
         $newHotel->name = $request->hotelName;
         $newHotel->address = $request->address;
-        $newHotel->postcode = $request->postCode;
-        $newHotel->city = $request->city;
-        $newHotel->state = $request->state;
-
-        $newHotel->currency = $request->currency;
-        $newHotel->accommodation_type = $request->accom;
-        $newHotel->category = $request->category;
-        $newHotel->web = $request->web;
+        $newHotel->phone = $request->phone;
+        $newHotel->email = $request->email;
+        $newHotel->image = $request->image;
         $newHotel->type_id = $request->typeID;
 
 
@@ -90,28 +80,18 @@ class HotelController extends Controller
     {
         $request->validate(['hotelName'=>'required']);
         $request->validate(['address'=>'required']);
-        $request->validate(['postCode'=>'required']);
-        $request->validate(['city'=>'required']);
-        $request->validate(['state'=>'required']);
-
-        $request->validate(['currency'=>'required']);
-        $request->validate(['accom'=>'required']);
-        $request->validate(['category'=>'required']);
-        $request->validate(['web'=>'required']);
+        $request->validate(['phone'=>'required']);
+        $request->validate(['email'=>'required']);
+        $request->validate(['image'=>'required']);
         $request->validate(['typeID'=>'required']);
         
         $newHotel = Hotel::find($id);
 
         $newHotel->name = $request->hotelName;
         $newHotel->address = $request->address;
-        $newHotel->postcode = $request->postCode;
-        $newHotel->city = $request->city;
-        $newHotel->state = $request->state;
-
-        $newHotel->currency = $request->currency;
-        $newHotel->accommodation_type = $request->accom;
-        $newHotel->category = $request->category;
-        $newHotel->web = $request->web;
+        $newHotel->phone = $request->phone;
+        $newHotel->email = $request->email;
+        $newHotel->image = $request->image;
         $newHotel->type_id = $request->typeID;
 
 
