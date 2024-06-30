@@ -42,12 +42,14 @@ class TransactionController extends Controller
         $request->validate(['customerID'=>'required']);
         $request->validate(['userID'=>'required']);
         $request->validate(['transactionDate'=>'required']);
+        $request->validate(['tax'=>'required']);
 
         $newTransaction = new Transaction;
         
         $newTransaction->customer_id = $request->customerID;
         $newTransaction->user_id = $request->userID;
         $newTransaction->transaction_date = $request->transactionDate;
+        $newTransaction->tax = $request->tax;
 
         $newTransaction->save();
         return redirect()->route('transaction.index')->with('status','Data berhasil masuk');
@@ -128,9 +130,19 @@ class TransactionController extends Controller
     {
         $cart = session('cart');
         $user = Auth::user();
+        $customers = Customer::all();
+        $customer = 0;
+
+        foreach($customers as $c){
+            if($c->user_id == $user->id){
+                $customer = $c->id;
+                break;
+            }
+        }
+
         $t = new Transaction();
         $t->user_id = $user->id;
-        $t->customer_id = 1;
+        $t->customer_id = $customer;
         $t->transaction_date = Carbon::now()->toDateTimeString();
         $t->save();
         $t->insertProducts($cart,$user);

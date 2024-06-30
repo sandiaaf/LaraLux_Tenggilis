@@ -5,8 +5,12 @@
     <p>Report of Transaction</p>
     <table class="table table-dark table-hover">
         <div>
-            <a href="{{route('transaction.create')}}" class="btn btn-success">Add</a>
-            <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add (With Modals)</a>
+            <!-- <a href="{{route('transaction.create')}}" class="btn btn-success">Add</a> -->
+
+            <!-- @can('delete-permission',Auth::user())
+            <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add</a>
+            @endcan -->
+
             <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content" >
@@ -104,8 +108,11 @@
 
                         <a href="{{route('transaction.edit',$d->id)}}" class="btn btn-success">Edit</a>
                         <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$d->id}})" class="btn btn-success">Edit Transaction Modal</a>
+
+                        @can('delete-permission',Auth::user())
                         <a href="#" value="DeleteNoReload" class="btn btn-danger"
                         onclick="if(confirm('Are you sure to delete {{$d->id}}-{{$d->customer->name}}?')) deleteDataRemoveTR({{$d->id}})">Delete No Reload</a>
+                        @endcan
 
                         <div class="modal fade" id="modalEditA" tabindex="-1" role="basic" aria-hidden="true">
                             <div class="modal-dialog modal-wide">
@@ -118,11 +125,11 @@
 
                         </div>
                     
-                        <form method="POST" action="{{route('transaction.destroy',$d->id)}}">
+                        <!-- <form method="POST" action="{{route('transaction.destroy',$d->id)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete" class="btn btn-danger">
-                        </form>
+                        </form> -->
                     </td>
                 </tr>
             @endforeach

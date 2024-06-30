@@ -8,7 +8,11 @@
                 <div class="cart-page-inner">
                     <div class="table-responsive">
                         @php
+                            $index=0;
+                            $subtotal = [];
+                            $ppn = 0;
                             $total = 0;
+                            $totalFinal = 0;
                         @endphp
                         <table class="table table-bordered">
                             <thead class="thead-dark">
@@ -23,6 +27,10 @@
                             <tbody class="align-middle">
                                 @if(session('cart'))
                                     @foreach (session('cart') as $item)
+                                    @php
+                                        $itemTotal = $item['quantity'] * $item['price'];
+                                        $subtotal[] = $itemTotal;
+                                    @endphp
                                     <tr>
                                         <td>
                                             <div class="img">
@@ -45,10 +53,9 @@
                                         <td>{{ 'IDR '.$item['quantity']* $item['price'] }}</td>
                                         <td><a class="btn btn-danger" href="{{route('delFromCart',$item['id'])}}"><i class="fa fa-trash"></i></a></td>
                                     </tr>
-                                    @php
-                                        $total+= $item['quantity']* $item['price'];
-                                    @endphp
-                                    @endforeach    
+
+                                    @endforeach
+
                                 @else
                                 <tr>
                                     <td colspan="5"><p>Tidak ada item di cart.</p></td>
@@ -71,8 +78,29 @@
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
-                                    <h1>Cart Summary</h1>                          
-                                      <h2>Grand Total<span>{{'IDR '.$total}}</span></h2>
+                                    <h1>Cart Summary</h1>
+                                    @if (session('cart'))
+                                    @foreach (session('cart') as $item)
+                                        <p>
+                                            <b>
+                                                {{ $item['quantity'] . " " . $item['name'] . ' Room' }}
+                                                @php
+                                                    $index++;
+                                                @endphp
+                                                <span>{{ 'IDR ' . $subtotal[$index-1] }}</span>
+                                            </b>
+                                        </p>
+                                        @php
+                                            $total += $subtotal[$index-1]
+                                        @endphp
+                                    @endforeach
+                                    @php
+                                        $ppn += $total*0.11;
+                                        $totalFinal +=$total+$ppn;
+                                    @endphp
+                                        <p><b>PPN (11%)<span>{{'IDR '.$ppn}}</span></p></b><br>                          
+                                        <h2>Grand Total<span>{{'IDR '.$totalFinal}}</span></h2>     
+                                    @endif                                      
                                 </div>
                                 <div class="cart-btn">
                                     <a class="btn btn-xs" href="{{route('laralux.index')}}">Continue Shopping</button>
