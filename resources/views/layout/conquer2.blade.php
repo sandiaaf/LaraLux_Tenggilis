@@ -535,8 +535,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				<li >
 					<a href="{{url('customer')}}">
-					<i class="icon-basket-loaded"></i>
-					<span class="title">Customer</span>
+					<i class="icon-user"></i>
+					<span class="title">Member</span>
 					</a>
 				</li>
 				<li >

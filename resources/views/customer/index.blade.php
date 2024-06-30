@@ -8,22 +8,26 @@
 
 <table class="table table-dark table-hover">
     <div>
-        <a href="{{route('customer.create')}}" class="btn btn-success">Add</a>
-        <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add (With Modals)</a>
+        {{-- <a href="{{route('customer.create')}}" class="btn btn-success">Add</a> --}}
+
+        @can('delete-permission',Auth::user())
+        <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add</a>
+        @endcan
+
         <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content" >
                 <div class="modal-header">
                   <button type="button" class="close" 
                     data-dismiss="modal" aria-hidden="true"></button>
-                  <h4 class="modal-title">Add New Customer</h4>
+                  <h4 class="modal-title">Add New Member</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{route('customer.store')}}">
                         @csrf
                             <div class="form-group">
-                            <label for="customerInput">Customer Name</label>
-                            <input name="customerName" type="text" class="form-control" id="customerInput" aria-describedby="customerHelp" placeholder="Enter Customer Name">
+                            <label for="customerInput">Member Name</label>
+                            <input name="customerName" type="text" class="form-control" id="customerInput" aria-describedby="customerHelp" placeholder="Enter Member Name">
                             <small id="customerHelp" class="form-text text-muted">Tidak boleh kosong.</small>
                             </div>
                 
@@ -57,6 +61,7 @@
         <tr>
             <th>Name</th>
             <th>Address</th>
+            <th>Poin</th>
             <th>Created at</th>
             <th>Update at</th>
         </tr>
@@ -66,15 +71,17 @@
             <tr id="tr_{{$c->id}}">
                 <td>{{$c -> name}}</td>
                 <td>{{$c -> address}}</td>
+                <td>{{$c -> poin}}</td>
                 <td>{{$c -> created_at}}</td>
                 <td>{{$c -> updated_at}}</td>
                 <td>
-                    <a href="{{route('customer.edit',$c -> id)}}" class="btn btn-success">Edit</a>
+                    {{-- <a href="{{route('customer.edit',$c -> id)}}" class="btn btn-success">Edit</a> --}}
 
-                    <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$c->id}})" class="btn btn-success">Edit Customer Modal</a>
+                    @can('delete-permission',Auth::user())
+                    <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$c->id}})" class="btn btn-success">Edit Member</a>
                     <a href="#" value="DeleteNoReload" class="btn btn-danger"
-                    onclick="if(confirm('Are you sure to delete {{$c->id}}-{{$c->name}}?')) deleteDataRemoveTR({{$c->id}})">Delete No Reload</a>
-
+                    onclick="if(confirm('Are you sure to delete {{$c->id}}-{{$c->name}}?')) deleteDataRemoveTR({{$c->id}})">Delete</a>
+                    @endcan
                     <div class="modal fade" id="modalEditA" tabindex="-1" role="basic" aria-hidden="true">
                         <div class="modal-dialog modal-wide">
                             <div class="modal-content">
@@ -86,11 +93,11 @@
                         </div>
                     </div>
                     
-                    <form method="POST" action="{{route('customer.destroy',$c->id)}}">
+                    {{-- <form method="POST" action="{{route('customer.destroy',$c->id)}}">
                         @csrf
                         @method('DELETE')
                         <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete" class="btn btn-danger">
-                    </form>
+                    </form> --}}
                 </td>
             </tr>
         @endforeach
@@ -98,9 +105,9 @@
 </table>
 
 @endsection
-@section('anak2','Daftar Customer')
-@section('anak3','Halaman Daftar Customer')
-@section('anak4','Customer')
+@section('anak2','Daftar Member')
+@section('anak3','Halaman Daftar Member')
+@section('anak4','Member')
 @section('js')
 <script>
     function getEditForm(customer_id)

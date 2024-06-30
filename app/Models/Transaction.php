@@ -38,11 +38,13 @@ class Transaction extends Model
     public function insertProducts($cart,$user)
     {
         $total = 0;
+        $tax = 0;
         foreach ($cart as $c) 
         {
             # code...
             $subtotal = $c['quantity']* $c['price'];
-            $total += $subtotal;
+            $tax += $subtotal * 0.11;
+            $total += $subtotal + $tax;
             $this->products()->attach($c['id'],['quantity' => $c['quantity'], 'subtotal' => $subtotal]);
         }
     }
