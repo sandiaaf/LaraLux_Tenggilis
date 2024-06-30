@@ -112,5 +112,4 @@ class CustomerController extends Controller
             'msg' =>'customer data is removed!'
         ),200);
     }
-
 }
