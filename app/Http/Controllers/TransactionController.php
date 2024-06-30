@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Product;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -106,6 +107,8 @@ class TransactionController extends Controller
         }
         
     }
+
+
     public function getEditForm(Request $request){
         $id = $request->id;
         $data = Transaction::find($id);
@@ -126,30 +129,106 @@ class TransactionController extends Controller
             'msg' =>'transaction data is removed!'
         ),200);
     }
+
+    public function insertPointByCustomerId($id, $point)
+    {
+        $customer = Customer::find($id);
+
+        if ($customer) {
+            $customer->poin += $point;
+            $customer->save();
+        } else {
+            dd($id);
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////////////
     public function checkout()
     {
         $cart = session('cart');
         $user = Auth::user();
         $customers = Customer::all();
-        $customer = 0;
+        $customerId = 0;
+        $customerNow = 0;
+        $pointRedem=0;
+        $currentPoint=0;
+        $point = 0;
+        $totalFinal=0;
+        $totalFinalRedem=0;
 
         foreach($customers as $c){
             if($c->user_id == $user->id){
-                $customer = $c->id;
+                $customerId = $c->id;
+                $currentPoint = $c->poin;
                 break;
             }
         }
 
+
+
         $t = new Transaction();
         $t->user_id = $user->id;
-        $t->customer_id = $customer;
+        $t->customer_id = $customerId;
         $t->transaction_date = Carbon::now()->toDateTimeString();
         $t->save();
-        $t->insertProducts($cart,$user);
-        session()->forget('cart');
-        return redirect()->route('laralux.index')->with('status','Checkout berhasil');
+        $t->insertProducts($cart, $user);
+    
+        $products = Product::all()->keyBy('id');
+
+        $roomTypes = [];
+
+        foreach ($cart as $item) {
+            $totalFinalRedem += $item['price'] * $item['quantity'];
+        }
+
+        if($totalFinalRedem>=100000){
+            //PEMBULATAN KEBAWAH
+            if($currentPoint == 0){
+
+            }else{
+                $pointRedem += floor($totalFinalRedem / 100000);
+                $newPoint = $currentPoint - $pointRedem;
+                $customerNow = Customer::find($customerId);
+    
+                if ($customerNow) {
+                    $customerNow->poin = $newPoint;
+                    $customerNow->save();
+                } else {
+    
+                }
+            }
+
+        }
+        foreach ($cart as $item) {
+            if (isset($products[$item['id']])) {
+                if (isset($item['price']) && isset($item['quantity'])) {
+                    $totalFinal += $item['price'] * $item['quantity'];
+                }
+                $roomTypes[] = $products[$item['id']]->type_room;
+    
+                if ($products[$item['id']]->type_room == 'Deluxe' || 
+                    $products[$item['id']]->type_room == 'Superior' || 
+                    $products[$item['id']]->type_room == 'Suite') {
+                    $point += 5 * $item['quantity'];
+                    $totalFinal -= $item['price'];
+                } else {
+                    if ($totalFinal >= 300000) {
+                        $totalFinalAfterTax = $totalFinal + ($totalFinal * 0.11);
+                        //PEMBULATAN KEBAWAH
+                        $point += floor($totalFinalAfterTax / 300000);
+                    }
+                }
+            } else {
+                dd("Product ID not found: " . $item['id']);
+            }
+        }
+
+        $this->insertPointByCustomerId($t->customer_id, $point);
+
         
+
+        session()->forget('cart');
+        return redirect()->route('laralux.index')->with('status', 'Checkout berhasil');
     }
-
-
+    
 }

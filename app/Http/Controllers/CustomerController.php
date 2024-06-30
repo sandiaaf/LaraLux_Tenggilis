@@ -26,7 +26,6 @@ class CustomerController extends Controller
         $users = User::all();
         return view('customer.create',compact('users'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -38,8 +37,11 @@ class CustomerController extends Controller
         
         $newCustomer = new Customer();
 
+        $poin=0;
+
         $newCustomer->name = $request->customerName;
         $newCustomer->address = $request->address;
+        $newCustomer->poin = $poin;
         $newCustomer->user_id = $request->userID;
 
         $newCustomer->save();
@@ -62,7 +64,6 @@ class CustomerController extends Controller
         $data = Customer::find($id);
         return view('customer.edit', compact('data'));
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -70,10 +71,12 @@ class CustomerController extends Controller
     {
         $request->validate(['customerName'=>'required']);
         $request->validate(['address'=>'required']);
+        $request->validate(['poin'=>'required']);
 
         $newCustomer = Customer::find($id);
         $newCustomer->name = $request->customerName;
         $newCustomer->address = $request->address;
+        $newCustomer->poin = $request->poin;
 
         $newCustomer->save();
         return redirect()->route('customer.index')->with('status','Data berhasil diedit');
@@ -88,12 +91,11 @@ class CustomerController extends Controller
             $customer = Customer::find($id);
             $customer->delete();
 
-            return redirect()->route('customer.index')->with('status','Data berhasil dihapuus');
+            return redirect()->route('customer.index')->with('status','Data berhasil dihapus');
         }catch(\Throwable $th){
-            $msg="Tidak bisa dihapuus, data sudah digunakan";
+            $msg="Tidak bisa dihapus, data sudah digunakan";
             return redirect()->route('customer.index')->with('status',$msg);
         }
-        
     }
     public function getEditForm(Request $request){
         $id = $request->id;
