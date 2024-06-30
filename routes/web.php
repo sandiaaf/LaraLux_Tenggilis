@@ -4,8 +4,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Customer;
+use App\Models\Product;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -173,3 +178,6 @@ Route::get('/user/{name?}', function ($name='All') {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/reports',[ReportController::class,'index'])->name('report.index');

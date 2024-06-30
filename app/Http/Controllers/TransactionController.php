@@ -21,7 +21,7 @@ class TransactionController extends Controller
         $data = Transaction::all();
         $customers = Customer::all();
         $users = User::all();
-        return view('transaction.transaction',['data'=>$data,'customers'=>$customers, 'users'=>$users]);
+        return view('transaction.transaction', ['data' => $data, 'customers' => $customers, 'users' => $users]);
     }
 
     /**
@@ -31,7 +31,7 @@ class TransactionController extends Controller
     {
         $customers = Customer::all();
         $users = User::all();
-        return view('transaction.create', ['customers'=>$customers, 'users'=>$users]);
+        return view('transaction.create', ['customers' => $customers, 'users' => $users]);
     }
 
     /**
@@ -39,18 +39,18 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['customerID'=>'required']);
-        $request->validate(['userID'=>'required']);
-        $request->validate(['transactionDate'=>'required']);
+        $request->validate(['customerID' => 'required']);
+        $request->validate(['userID' => 'required']);
+        $request->validate(['transactionDate' => 'required']);
 
         $newTransaction = new Transaction;
-        
+
         $newTransaction->customer_id = $request->customerID;
         $newTransaction->user_id = $request->userID;
         $newTransaction->transaction_date = $request->transactionDate;
 
         $newTransaction->save();
-        return redirect()->route('transaction.index')->with('status','Data berhasil masuk');
+        return redirect()->route('transaction.index')->with('status', 'Data berhasil masuk');
     }
 
     /**
@@ -69,7 +69,7 @@ class TransactionController extends Controller
         $data = Transaction::find($id);
         $customers = Customer::all();
         $users = User::all();
-        return view('transaction.edit', ['data'=>$data, 'customers'=>$customers, 'users'=>$users]);
+        return view('transaction.edit', ['data' => $data, 'customers' => $customers, 'users' => $users]);
     }
 
     /**
@@ -77,15 +77,15 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['customerID'=>'required']);
-        $request->validate(['userID'=>'required']);
+        $request->validate(['customerID' => 'required']);
+        $request->validate(['userID' => 'required']);
 
         $newTransaction = Transaction::find($id);
         $newTransaction->customer_id = $request->customerID;
         $newTransaction->user_id = $request->userID;
 
         $newTransaction->save();
-        return redirect()->route('transaction.index')->with('status','Data berhasil diedit');
+        return redirect()->route('transaction.index')->with('status', 'Data berhasil diedit');
     }
 
     /**
@@ -93,36 +93,37 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
             $type = Transaction::find($id);
             $type->delete();
 
-            return redirect()->route('transaction.index')->with('status','Data berhasil dihapuus');
-        }catch(\Throwable $th){
-            $msg="Tidak bisa dihapuus, data sudah digunakan";
-            return redirect()->route('transaction.index')->with('status',$msg);
+            return redirect()->route('transaction.index')->with('status', 'Data berhasil dihapuus');
+        } catch (\Throwable $th) {
+            $msg = "Tidak bisa dihapuus, data sudah digunakan";
+            return redirect()->route('transaction.index')->with('status', $msg);
         }
-        
     }
-    public function getEditForm(Request $request){
+    public function getEditForm(Request $request)
+    {
         $id = $request->id;
         $data = Transaction::find($id);
         $customers = Customer::all();
         $users = User::all();
 
         return response()->json(array(
-            'status'=> 'oke',
-            'msg' =>view('transaction.getEditForm',compact('data','customers','users'))->render()
-        ),200);
+            'status' => 'oke',
+            'msg' => view('transaction.getEditForm', compact('data', 'customers', 'users'))->render()
+        ), 200);
     }
-    public function deleteData(Request $request){
+    public function deleteData(Request $request)
+    {
         $id = $request->id;
         $data = Transaction::find($id);
         $data->delete();
         return response()->json(array(
-            'status'=> 'oke',
-            'msg' =>'transaction data is removed!'
-        ),200);
+            'status' => 'oke',
+            'msg' => 'transaction data is removed!'
+        ), 200);
     }
     public function checkout()
     {
@@ -133,11 +134,8 @@ class TransactionController extends Controller
         $t->customer_id = 1;
         $t->transaction_date = Carbon::now()->toDateTimeString();
         $t->save();
-        $t->insertProducts($cart,$user);
+        $t->insertProducts($cart, $user);
         session()->forget('cart');
-        return redirect()->route('laralux.index')->with('status','Checkout berhasil');
-        
+        return redirect()->route('laralux.index')->with('status', 'Checkout berhasil');
     }
-
-
 }

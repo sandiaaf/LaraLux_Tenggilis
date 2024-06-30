@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class HotelController extends Controller
 {
