@@ -60,12 +60,12 @@ License: You must have a valid license purchased only from themeforest(the above
                 <img src="{{asset('assets/img/logo.png')}}" alt="logo"/>
             </a>
         </div>
-        <form class="search-form search-form-header" role="form" action="index.html">
+        {{-- <form class="search-form search-form-header" role="form" action="index.html">
             <div class="input-icon right">
                 <i class="icon-magnifier"></i>
                 <input type="text" class="form-control input-sm" name="query" placeholder="Search...">
             </div>
-        </form>
+        </form> --}}
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -75,7 +75,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<ul class="nav navbar-nav pull-right">
 			<!-- BEGIN NOTIFICATION DROPDOWN -->
-			<li class="" >
+			{{-- <li class="" >
 				<a href="{{url('laralux/user/cart')}}" style="color:white;">Cart
 				<i class="icon-basket-loaded"></i>
 				</a>
@@ -84,8 +84,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				<a href="{{url('laralux')}}" style="color:white;">Product Gallery
 				<i class="icon-bar-chart"></i>
 				</a>
-			</li>
-			<li class="dropdown" id="header_notification_bar">
+			</li> --}}
+			{{-- <li class="dropdown" id="header_notification_bar">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<i class="icon-bell"></i>
 				<span class="badge badge-success">
@@ -187,10 +187,10 @@ License: You must have a valid license purchased only from themeforest(the above
 						<a href="#">See all notifications <i class="fa fa-angle-right"></i></a>
 					</li>
 				</ul>
-			</li>
+			</li> --}}
 			<!-- END NOTIFICATION DROPDOWN -->
 			<!-- BEGIN INBOX DROPDOWN -->
-			<li class="dropdown" id="header_inbox_bar">
+			{{-- <li class="dropdown" id="header_inbox_bar">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<i class="icon-envelope-open"></i>
 				<span class="badge badge-info">
@@ -285,10 +285,10 @@ License: You must have a valid license purchased only from themeforest(the above
 						<a href="inbox.html">See all messages <i class="fa fa-angle-right"></i></a>
 					</li>
 				</ul>
-			</li>
+			</li> --}}
 			<!-- END INBOX DROPDOWN -->
 			<!-- BEGIN TODO DROPDOWN -->
-			<li class="dropdown" id="header_task_bar">
+			{{-- <li class="dropdown" id="header_task_bar">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<i class="icon-calendar"></i>
 				<span class="badge badge-warning">
@@ -420,7 +420,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<a href="#">See all tasks <i class="fa fa-angle-right"></i></a>
 					</li>
 				</ul>
-			</li>
+			</li> --}}
 			<!-- END TODO DROPDOWN -->
 			<li class="devider">
 				 &nbsp;
