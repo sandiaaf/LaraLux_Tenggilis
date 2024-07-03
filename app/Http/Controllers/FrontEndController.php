@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Facilitie;
 
 class FrontEndController extends Controller
 {
@@ -15,7 +16,10 @@ class FrontEndController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view('frontend.product-detail',compact('product'));
+       
+        $facilities = Facilitie::where('id_product', $id)->get();
+
+        return view('frontend.product-detail', compact('product', 'facilities'));
     }
     public function addToCart($id){
         $product = Product::find($id);
