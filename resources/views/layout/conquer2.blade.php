@@ -516,6 +516,12 @@ License: You must have a valid license purchased only from themeforest(the above
 						<span class="title">Product</span>
 						</a>
 					</li>
+					<li >
+						<a href="{{url('facilitie')}}">
+						<i class="icon-bar-chart"></i>
+						<span class="title">Facilities</span>
+						</a>
+					</li>
 				@endcan
 
 				@can('permission-customer',Auth::user())
