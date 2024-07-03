@@ -14,15 +14,27 @@ class TypePolicy
     {
         //
     }
-    public function delete(User $user)
+    public function permissionOwner(User $user)
     {
         return ($user->role=='owner'
             ? Response::allow()
             : Response::deny('You must be an administrator'));
     }
-    public function deleteCustomer(User $user)
+    public function permissionStaff(User $user)
+    {
+        return ($user->role=='staff'
+            ? Response::allow()
+            : Response::deny('You must be an administrator'));
+    }
+    public function permissionCustomer(User $user)
     {
         return ($user->role=='customer'
+            ? Response::allow()
+            : Response::deny('You must be an administrator'));
+    }
+    public function permissionOwnerStaff(User $user)
+    {
+        return ($user->role == 'owner' || $user->role == 'staff'
             ? Response::allow()
             : Response::deny('You must be an administrator'));
     }
