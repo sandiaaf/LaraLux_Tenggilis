@@ -503,49 +503,57 @@ License: You must have a valid license purchased only from themeforest(the above
 					<span class="selected"></span>
 					</a>
 				</li>
-				<li >
-					<a href="{{url('report/availableHotelRooms')}}">
-					<i class="icon-bar-chart"></i>
-					<span class="title">Available Room</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('product')}}">
-					<i class="icon-bar-chart"></i>
-					<span class="title">Product</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('laralux/user/cart')}}">
-					<i class="icon-basket-loaded"></i>
-					<span class="title">Cart</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('laralux')}}">
-					<i class="icon-bar-chart"></i>
-					<span class="title">Product Gallery</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('transaction')}}">
-					<i class="icon-basket-loaded"></i>
-					<span class="title">Transaction</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('customer')}}">
-					<i class="icon-user"></i>
-					<span class="title">Member</span>
-					</a>
-				</li>
-				<li >
-					<a href="{{url('type')}}">
-					<i class="icon-notebook"></i>
-					<span class="title">Types</span>
-					</a>
-				</li>
-				<li >
+				@can('permission-ownerstaff')
+					<li >
+						<a href="{{url('report/availableHotelRooms')}}">
+						<i class="icon-bar-chart"></i>
+						<span class="title">Available Room</span>
+						</a>
+					</li>
+					<li >
+						<a href="{{url('product')}}">
+						<i class="icon-bar-chart"></i>
+						<span class="title">Product</span>
+						</a>
+					</li>
+				@endcan
+
+				@can('permission-customer',Auth::user())
+					<li >
+						<a href="{{url('laralux')}}">
+						<i class="icon-bar-chart"></i>
+						<span class="title">Product Gallery</span>
+						</a>
+					</li>
+					<li >
+						<a href="{{url('laralux/user/cart')}}">
+						<i class="icon-basket-loaded"></i>
+						<span class="title">Cart</span>
+						</a>
+					</li>
+				@endcan
+
+				@can('permission-ownerstaff',Auth::user())
+					<li >
+						<a href="{{url('transaction')}}">
+						<i class="icon-basket-loaded"></i>
+						<span class="title">Transaction</span>
+						</a>
+					</li>
+					<li >
+						<a href="{{url('customer')}}">
+						<i class="icon-user"></i>
+						<span class="title">Member</span>
+						</a>
+					</li>
+					<li >
+						<a href="{{url('type')}}">
+						<i class="icon-notebook"></i>
+						<span class="title">Types</span>
+						</a>
+					</li>
+				@endcan
+				<!-- <li >
 					<a href="{{url('type/create')}}">
 					<i class="icon-docs"></i>
 					<span class="title">Submision</span>
@@ -556,7 +564,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<i class="icon-user"></i>
 					<span class="title">Login</span>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

@@ -10,8 +10,8 @@
     <div>
         {{-- <a href="{{route('customer.create')}}" class="btn btn-success">Add</a> --}}
 
-        @can('delete-permission',Auth::user())
-        <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add</a>
+        @can('permission-owner',Auth::user())
+            <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add</a>
         @endcan
 
         <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
@@ -77,10 +77,10 @@
                 <td>
                     {{-- <a href="{{route('customer.edit',$c -> id)}}" class="btn btn-success">Edit</a> --}}
 
-                    @can('delete-permission',Auth::user())
-                    <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$c->id}})" class="btn btn-success">Edit Member</a>
-                    <a href="#" value="DeleteNoReload" class="btn btn-danger"
-                    onclick="if(confirm('Are you sure to delete {{$c->id}}-{{$c->name}}?')) deleteDataRemoveTR({{$c->id}})">Delete</a>
+                    @can('permission-owner',Auth::user())
+                        <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$c->id}})" class="btn btn-success">Edit Member</a>
+                        <a href="#" value="DeleteNoReload" class="btn btn-danger"
+                        onclick="if(confirm('Are you sure to delete {{$c->id}}-{{$c->name}}?')) deleteDataRemoveTR({{$c->id}})">Delete</a>
                     @endcan
                     <div class="modal fade" id="modalEditA" tabindex="-1" role="basic" aria-hidden="true">
                         <div class="modal-dialog modal-wide">

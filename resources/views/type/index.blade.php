@@ -8,8 +8,10 @@
 
 <table class="table table-dark table-hover">
     <div>
-        <a href="{{route('type.create')}}" class="btn btn-success">Add Type</a>
-        <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add Type(With Modals)</a>
+        @can('permission-owner', Auth::user())
+            <!-- <a href="{{route('type.create')}}" class="btn btn-success">Add Type</a> -->
+            <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add Type(With Modals)</a>
+        @endcan
         <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content" >
@@ -70,7 +72,7 @@
 
                     </div>
                     
-                    @can('delete-permission',Auth::user())
+                    @can('permission-owner',Auth::user())
                     <form method="POST" action="{{route('type.destroy',$type->id)}}">
                         @csrf
                         @method('DELETE')

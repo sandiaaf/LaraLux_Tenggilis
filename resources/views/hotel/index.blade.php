@@ -8,7 +8,9 @@
 
 <table class="table table-dark table-hover">
     <div>
-        <a href="{{route('hotel.create')}}" class="btn btn-primary">Add Hotel</a>
+        @can('permission-owner',Auth::user())
+            a href="{{route('hotel.create')}}" class="btn btn-primary">Add Hotel</a>
+        @endcan
     </div>
     <thead>
         <tr>
@@ -44,7 +46,9 @@
                     <form method="POST" action="{{route('hotel.destroy',$hotel->id)}}">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete" class="btn btn-danger">
+                        @can('permission-owner',Auth::user())
+                            <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete" class="btn btn-danger">
+                        @endcan
                     </form>
                 </td>
             </tr>
@@ -65,7 +69,9 @@
                             <form method="POST" action="{{route('product.destroy',$product->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete Product" class="btn btn-danger">
+                                @can('permission-owner',Auth::user())
+                                    <input type="submit" onclick="return confirm('Are you want to delete this?')" value="Delete Product" class="btn btn-danger">
+                                @endcan
                             </form>
                         </td>
                     </tr>

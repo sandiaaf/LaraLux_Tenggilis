@@ -7,9 +7,9 @@
         <div>
             <!-- <a href="{{route('transaction.create')}}" class="btn btn-success">Add</a> -->
 
-            <!-- @can('delete-permission',Auth::user())
+            @can('permission-owner',Auth::user())
             <a href="#modalCreate" data-toggle="modal" class="btn btn-primary">Add</a>
-            @endcan -->
+            @endcan
 
             <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
                 <div class="modal-dialog">
@@ -109,9 +109,9 @@
                         <a href="{{route('transaction.edit',$d->id)}}" class="btn btn-success">Edit</a>
                         <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$d->id}})" class="btn btn-success">Edit Transaction Modal</a>
 
-                        @can('delete-permission',Auth::user())
-                        <a href="#" value="DeleteNoReload" class="btn btn-danger"
-                        onclick="if(confirm('Are you sure to delete {{$d->id}}-{{$d->customer->name}}?')) deleteDataRemoveTR({{$d->id}})">Delete No Reload</a>
+                        @can('permission-owner',Auth::user())
+                            <a href="#" value="DeleteNoReload" class="btn btn-danger"
+                            onclick="if(confirm('Are you sure to delete {{$d->id}}-{{$d->customer->name}}?')) deleteDataRemoveTR({{$d->id}})">Delete No Reload</a>
                         @endcan
 
                         <div class="modal fade" id="modalEditA" tabindex="-1" role="basic" aria-hidden="true">
