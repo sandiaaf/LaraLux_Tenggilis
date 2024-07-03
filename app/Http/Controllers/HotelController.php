@@ -82,6 +82,7 @@ class HotelController extends Controller
         $request->validate(['address'=>'required']);
         $request->validate(['phone'=>'required']);
         $request->validate(['email'=>'required']);
+        $request->validate(['rating'=>'required']);
         $request->validate(['image'=>'required']);
         $request->validate(['typeID'=>'required']);
         
@@ -91,6 +92,7 @@ class HotelController extends Controller
         $newHotel->address = $request->address;
         $newHotel->phone = $request->phone;
         $newHotel->email = $request->email;
+        $newHotel->email = $request->rating;
         $newHotel->image = $request->image;
         $newHotel->type_id = $request->typeID;
 

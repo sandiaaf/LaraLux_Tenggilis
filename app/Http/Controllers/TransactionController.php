@@ -163,6 +163,18 @@ class TransactionController extends Controller
                 break;
             }
         }
+        if ($customerId == 0) {
+            $newCustomer = new Customer();
+
+            $newCustomer->name = $user->name;
+            $newCustomer->address = $user->address;
+            $newCustomer->poin = $point;
+            $newCustomer->user_id = $user->id;
+            $newCustomer->save();
+
+            $customerId = $newCustomer->id;
+            $currentPoint = $newCustomer->poin;
+        }
 
 
 

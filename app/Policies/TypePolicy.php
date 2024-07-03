@@ -16,7 +16,13 @@ class TypePolicy
     }
     public function delete(User $user)
     {
-    return ($user->role=='owner'
+        return ($user->role=='owner'
+            ? Response::allow()
+            : Response::deny('You must be an administrator'));
+    }
+    public function deleteCustomer(User $user)
+    {
+        return ($user->role=='customer'
             ? Response::allow()
             : Response::deny('You must be an administrator'));
     }

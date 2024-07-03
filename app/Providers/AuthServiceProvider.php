@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         // });
 
         Gate::define('delete-permission','App\Policies\TypePolicy@delete');
+        Gate::define('permission-customer','App\Policies\TypePolicy@deleteCustomer');
       
     }
 }

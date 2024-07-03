@@ -33,6 +33,12 @@
             </div>
 
             <div class="form-group">
+                <label for="ratingInput">Rating</label>
+                <input name="rating" type="rating" class="form-control" id="ratingInput" aria-describedby="ratingHelp" placeholder="Enter Rating">
+                <small id="ratingHelp" class="form-text text-muted">Tidak boleh kosong.</small>
+            </div>
+
+            <div class="form-group">
                 <label for="imageInput">Image</label>
                 <input name="image" type="file" class="form-control" id="imageInput" aria-describedby="imageHelp" placeholder="Enter Image">
                 <small id="imageHelp" class="form-text text-muted">Tidak boleh kosong.</small>
