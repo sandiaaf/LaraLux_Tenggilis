@@ -5,7 +5,7 @@
     <h2>Update Hotel</h2>
     <p>Update hotel</p>
 
-    <form method="POST" action="{{route('hotel.update',$data->id)}}">
+    <form method="POST" action="{{route('hotel.update',$data->id)}}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
             <div class="form-group">

@@ -5,7 +5,7 @@
     <h2>Add Hotel</h2>
     <p>Add hotel</p>
 
-    <form method="POST" action="{{route('hotel.store')}}">
+    <form method="POST" action="{{route('hotel.store')}}" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
             <label for="typeInput">Hotel Name</label>

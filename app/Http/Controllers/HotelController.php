@@ -36,6 +36,7 @@ class HotelController extends Controller
         $request->validate(['address'=>'required']);
         $request->validate(['phone'=>'required']);
         $request->validate(['email'=>'required']);
+        $request->validate(['rating'=>'required']);
         $request->validate(['image'=>'required']);
         $request->validate(['typeID'=>'required']);
         
@@ -45,11 +46,21 @@ class HotelController extends Controller
         $newHotel->address = $request->address;
         $newHotel->phone = $request->phone;
         $newHotel->email = $request->email;
+        $newHotel->rating = $request->rating;
         $newHotel->image = $request->image;
         $newHotel->type_id = $request->typeID;
 
 
         $newHotel->save();
+
+        
+        $file=$request->file("image");
+        $folder='images';
+        $filename=time()."_".$file->getClientOriginalName();
+        $file->move($folder,$filename);
+        $newHotel->image=$filename;
+        $newHotel->save();
+
         return redirect()->route('hotel.index')->with('status','Data berhasil masuk');
     }
 
@@ -92,12 +103,19 @@ class HotelController extends Controller
         $newHotel->address = $request->address;
         $newHotel->phone = $request->phone;
         $newHotel->email = $request->email;
-        $newHotel->email = $request->rating;
+        $newHotel->rating = $request->rating;
         $newHotel->image = $request->image;
         $newHotel->type_id = $request->typeID;
-
+        
+        $file = $request->file('image');
+        $folder = 'images';
+        $filename = time() . "_" . $file->getClientOriginalName();
+        $file->move(public_path($folder), $filename);
+        $newHotel->image = $filename;
 
         $newHotel->save();
+
+
         return redirect()->route('hotel.index')->with('status','Data berhasil diedit');
     }
 
