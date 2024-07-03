@@ -55,7 +55,7 @@
                     <a href="{{route('type.edit',$type -> id)}}" class="btn btn-success">Edit Type</a>
                     <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$type->id}})" class="btn btn-success">Edit Type Modal</a>
 
-                    @can('permission',Auth::user())
+                    @can('permission-owner',Auth::user())
                     <a href="#" value="DeleteNoReload" class="btn btn-danger"
                     onclick="if(confirm('Are you sure to delete {{$type->id}}-{{$type->name}}?')) deleteDataRemoveTR({{$type->id}})">Delete No Reload</a>
                     @endcan

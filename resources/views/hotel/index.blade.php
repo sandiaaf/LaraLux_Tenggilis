@@ -41,7 +41,9 @@
                 <td>{{$hotel -> city}}</td>
                 <td>{{$hotel -> type}}</td>
                 <td>
-                    <a href="{{route('hotel.edit',$hotel -> id)}}" class="btn btn-success">Edit</a>
+                    @can('permission-ownerstaff',Auth::user())
+                        <a href="{{route('hotel.edit',$hotel -> id)}}" class="btn btn-success">Edit</a>
+                    @endcan
 
                     <form method="POST" action="{{route('hotel.destroy',$hotel->id)}}">
                         @csrf
@@ -63,7 +65,9 @@
                             {{$product->price}}
                         </td>
                         <td>
-                            <a href="{{route('product.edit',$product-> id)}}" class="btn btn-success">Edit Product</a>
+                            @can('permission-ownerstaff',Auth::user())
+                                <a href="{{route('product.edit',$product-> id)}}" class="btn btn-success">Edit Product</a>
+                            @endcan
                         </td>
                         <td>
                             <form method="POST" action="{{route('product.destroy',$product->id)}}">
