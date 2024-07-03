@@ -6,6 +6,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\FacilitieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,11 @@ Route::resource('transaction',TransactionController::class)->middleware('auth');
 Route::resource('type',TypeController::class)->middleware('auth');
 Route::resource('customer',CustomerController::class)->middleware('auth');
 Route::resource('product',ProductController::class)->middleware('auth');
+Route::resource('facilitie',FacilitieController::class)->middleware('auth');
+
+Route::post('facilitie/getEditForm',[FacilitieController::class,'getEditForm'])->name('facilitie.getEditForm');
+Route::post('facilitie/deleteData',[FacilitieController::class,'deleteData'])->name('facilitie.deleteData');
+
 
 Route::post('type/getEditForm',[TypeController::class,'getEditForm'])->name('type.getEditForm');
 Route::post('type/deleteData',[TypeController::class,'deleteData'])->name('type.deleteData');
@@ -60,6 +66,8 @@ Route::post('product/delPhoto',[ProductController::class, 'delPhoto']);
 
 Route::post('transaction/getEditForm',[TransactionController::class,'getEditForm'])->name('transaction.getEditForm');
 Route::post('transaction/deleteData',[TransactionController::class,'deleteData'])->name('transaction.deleteData');
+
+Route::get('facilitie/create',[FacilitieController::class,'create'])->name('facilitie.create');
 
 Route::get('/laralux',[FrontEndController::class,'index'])->name('laralux.index');
 Route::get('/laralux/{laralux}',[FrontEndController::class,'show'])->name('laralux.show');
