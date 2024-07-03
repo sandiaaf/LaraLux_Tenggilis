@@ -73,14 +73,11 @@ class FacilitieController extends Controller
     {
         $request->validate(['name'=>'required']);
         $request->validate(['desc'=>'required']);
-        $request->validate(['productID'=>'required']);
         
         $newFacilitie = Facilitie::find($id);
 
         $newFacilitie->name = $request->name;
         $newFacilitie->description = $request->desc;
-        $newFacilitie->id_product = $request->productID;
-
 
         $newFacilitie->save();
         return redirect()->route('facilitie.index')->with('status','Data berhasil masuk');
