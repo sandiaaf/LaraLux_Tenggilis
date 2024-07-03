@@ -71,7 +71,7 @@
                 <td>
                     {{-- <a href="{{route('customer.edit',$c -> id)}}" class="btn btn-success">Edit</a> --}}
 
-                    @can('delete-permission',Auth::user())
+                    @can('permission-owner',Auth::user())
                     <a href="#modalEditA" data-toggle="modal" onclick="getEditForm({{$f->id}})" class="btn btn-success">Edit Facilitie</a>
                     <a href="#" value="DeleteNoReload" class="btn btn-danger"
                     onclick="if(confirm('Are you sure to delete {{$f->id}}-{{$f->name}}?')) deleteDataRemoveTR({{$f->id}})">Delete</a>
