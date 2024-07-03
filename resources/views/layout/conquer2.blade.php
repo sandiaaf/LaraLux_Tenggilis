@@ -528,6 +528,12 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 				</li>
 				<li >
+					<a href="{{url('facilitie')}}">
+					<i class="icon-bar-chart"></i>
+					<span class="title">Facilitie</span>
+					</a>
+				</li>
+				<li >
 					<a href="{{url('transaction')}}">
 					<i class="icon-basket-loaded"></i>
 					<span class="title">Transaction</span>

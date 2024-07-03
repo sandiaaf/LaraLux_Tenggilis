@@ -80,15 +80,15 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['customerID'=>'required']);
-        $request->validate(['userID'=>'required']);
+            $request->validate(['customerID'=>'required']);
+            $request->validate(['userID'=>'required']);
 
-        $newTransaction = Transaction::find($id);
-        $newTransaction->customer_id = $request->customerID;
-        $newTransaction->user_id = $request->userID;
+            $newTransaction = Transaction::find($id);
+            $newTransaction->customer_id = $request->customerID;
+            $newTransaction->user_id = $request->userID;
 
-        $newTransaction->save();
-        return redirect()->route('transaction.index')->with('status','Data berhasil diedit');
+            $newTransaction->save();
+            return redirect()->route('transaction.index')->with('status','Data berhasil diedit');
     }
 
     /**
